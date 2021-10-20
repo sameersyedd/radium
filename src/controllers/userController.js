@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 
 const UserModel = require('../models/userModel')
+const cartModel = require('../models/cartModel')
 const validEmailFormatRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const validNumberRegex = /\d+/
 const validIndianMobileRegex = /^[0]?[789]\d{9}$/
@@ -203,11 +204,14 @@ const getUserProfile = async function (req, res) {
             return res.status(400).send({status: false, message: `${userId} is not a valid user id`})
         }
 
-        const user = await UserModel.findById(userId, {password: 0})
+        const user = await UserModel.findById(userId, {password: 0}).lean()
 
         if(!user) {
             return res.status(404).send({status: false, message: "User not found"})
         }
+
+        const userCart = await cartModel.findOne({userId: userId})
+        if(userCart) user.cartId = userCart._id
 
         return res.status(200).send({status: true, message: 'User profile details', data: user})
     } catch (error) {
