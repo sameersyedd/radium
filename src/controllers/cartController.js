@@ -291,7 +291,7 @@ const updateCart = async function (req, res) {
 
             const productRemovefromCart = await cartModel.findOneAndUpdate({ _id: cartId }, updatedProductRemoveData, { new: true }).populate('items.productId', { _id: 1, title: 1, price: 1, productImage: 1 })
 
-            return res.status(400).send({ status: false, message: "success", data: productRemovefromCart })
+            return res.status(200).send({ status: false, message: "success", data: productRemovefromCart })
 
         }
 
@@ -321,10 +321,9 @@ const updateCart = async function (req, res) {
 
             const cartUpToDate = await cartModel.findOneAndUpdate({ _id: cartId }, updatedCartData, { new: true }).populate('items.productId', { _id: 1, title: 1, price: 1, productImage: 1 })
 
-            return res.status(400).send({ status: false, message: "success", data: cartUpToDate })
+            return res.status(200).send({ status: true, message: "success", data: cartUpToDate })
 
         } else {
-            console.log("line No. 299", isItemAdded.quantity)
 
             const updatedCartReplaceData = {}
 
@@ -356,7 +355,7 @@ const updateCart = async function (req, res) {
 
             const cartUpToDate = await cartModel.findOneAndUpdate({ _id: cartId }, updatedCartData, { new: true }).populate('items.productId', { _id: 1, title: 1, price: 1, productImage: 1 })
 
-            return res.status(400).send({ status: false, message: "success", data: cartUpToDate })
+            return res.status(200).send({ status: true, message: "success", data: cartUpToDate })
         }
     } catch (error) {
         console.log(error)
