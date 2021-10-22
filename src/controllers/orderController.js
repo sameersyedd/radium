@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const userModel = require('../models/userModel')
 const cartModel = require('../models/cartModel')
 const orderModel = require('../models/orderModel')
+const { json } = require('body-parser')
 
 const isValidRequestBody = function (requestBody) {
     return Object.keys(requestBody).length > 0
@@ -33,14 +34,18 @@ const createOrder = async function (req, res) {
             return res.status(404).send({ status: false, message: `user does not exit` })
         }
 
+        if(!cartId){
+            return res.status(400).send({ status: false, message: `cartId is required` })
+        }
+
         if (!isValidObjectId(cartId)) {
             return res.status(400).send({ status: false, message: `${cartId} is not a valid cart id` })
         }
 
-        const cart = await cartModel.findOne({ _id: cartId, isDeleted: false });
+        const cart = await cartModel.findOne({ _id: cartId, userId: userId });
 
         if (!cart) {
-            return res.status(404).send({ status: false, message: `cart does not exit` })
+            return res.status(404).send({ status: false, message: `this User is not the owner of this cart` })
         }
 
         if (cancellable) {
@@ -50,13 +55,13 @@ const createOrder = async function (req, res) {
         }
 
         if (status) {
-            if ((["pending", "completed", "cancled"].indexOf(status) === -1)) {
-                return res.status(400).send({ status: false, message: `Status should be among ${["pending", "completed", "cancled"].join(', ')}` })
+            if ((["pending", "completed", "canceled"].indexOf(status) === -1)) {
+                return res.status(400).send({ status: false, message: `Status should be among ${["pending", "completed", "canceled"].join(', ')}` })
             }
         }
 
         if (!(cart.items.length)) {
-            return res.status(202).send({ status: true, message: `order has been accepted` })
+            return res.status(202).send({ status: true, message: `order has been accepted, please add more product in the cart` })
         }
 
         let totalQuantity = 0;
@@ -123,46 +128,78 @@ const updateOrder = async function (req, res) {
             return res.status(404).send({ status: false, message: `user does not exit` })
         }
 
-        const {status, orderId} = requestBody;
+        const { status, orderId } = requestBody;
 
-        if (!(isValidRequestBody(requestBody))) {
-            return res.status(400).send({ status: false, message: 'No paramateres passed. order unmodified'})
+        if (!orderId) {
+            return res.status(400).send({ status: false, message: `orderId is required in request body` })
         }
 
         if (!isValidObjectId(orderId)) {
             return res.status(400).send({ status: false, message: `${orderId} is not a valid order id` })
         }
 
-        const order = await orderModel.findOne({ _id: orderId});
+        const order = await orderModel.findOne({ _id: orderId });
 
         if (!order) {
             return res.status(404).send({ status: false, message: `order does not exit` })
         }
 
+        if(!status){
+            return res.status(400).send({status: true, message: "No paramateres passed of the order, order unmodified", data: order})
+        }
+
 
         if (order.cancellable == true) {
-            
-            if (status) {
-                if ((["pending", "completed", "cancled"].indexOf(status) === -1)) {
-                    return res.status(400).send({ status: false, message: `Status should be among ${["pending", "completed", "cancled"].join(', ')}` })
+
+            if (order.status == "pending") {
+                if (status) {
+                    if ((["completed", "pending", "canceled"].indexOf(status) === -1)) {
+                        return res.status(400).send({ status: false, message: `Status should be among ${["completed", "pending", "canceled"].join(', ')}` })
+                    }
+
+                    const updatedOrder = await orderModel.findOneAndUpdate({ _id: orderId }, { $set: { status: status } }, { new: true })
+
+                    return res.status(200).send({ status: true, message: `Success`, data: updatedOrder })
                 }
             }
 
-           const updatedOrder = await orderModel.findOneAndUpdate({ _id: orderId }, { $set: { status: status } }, {new: true})
+            if (order.status == "completed") {
+                if (status) {
+                    return res.status(400).send({ status: true, message: `order has been completed hence Status can not be changed` })
+                }
+            }
 
-           return res.status(200).send({ status: true, message: `Success`, data: updatedOrder})
+            if (order.status == "canceled") {
+                if (status) {
+                    return res.status(400).send({ status: true, message: `order has been canceled hence Status can not be changed` })
+                }
+            }
+
         }
-        
 
-        if (status) {
-            if ((["pending", "completed"].indexOf(status) === -1)) {
-                return res.status(400).send({ status: false, message: `Status should be among ${["pending", "completed"].join(', ')}` })
+        if (order.status == "completed") {
+            if (status) {
+                return res.status(400).send({ status: true, message: `order has been completed hence Status can not be changed` })
             }
         }
 
-       const updatedOrder = await orderModel.findOneAndUpdate({ _id: orderId }, { $set: { status: status } }, {new: true})
+        if (order.status == "canceled") {
+            if (status) {
+                return res.status(400).send({ status: true, message: `order has been canceled hence Status can not be changed` })
+            }
+        }
 
-       return res.status(200).send({ status: true, message: `Success`, data: updatedOrder})
+        if (order.status == "pending") {
+            if (status) {
+                if((["completed", "pending"].indexOf(status) === -1)) {
+                    return res.status(400).send({status: false, message: `Status should be among ${["completed", "pending"].join(', ')}`})
+                }
+
+                const updatedOrder = await orderModel.findOneAndUpdate({ _id: orderId }, { $set: { status: status } }, { new: true })
+
+                return res.status(200).send({ status: true, message: `Success`, data: updatedOrder })
+            }
+        }
 
     } catch (error) {
         console.log(error)

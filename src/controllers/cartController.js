@@ -216,7 +216,10 @@ const updateCart = async function (req, res) {
         requestBody = req.body
 
         if (!isValidRequestBody(requestBody)) {
-            return res.status(400).send({ status: false, message: 'Invalid params received in request body' })
+          
+            const cart = await cartModel.findOne({ userId: userId }).populate('items.productId', { _id: 1, title: 1, price: 1, productImage: 1 })
+
+            return res.status(400).send({ status: true, message: 'no parameteres passed, cart unmodified', data: cart })
         }
 
         const { cartId, productId, removeProduct } = requestBody
@@ -232,6 +235,27 @@ const updateCart = async function (req, res) {
             return res.status(404).send({ status: false, message: `user does not exit` })
         }
 
+        if (!isValid(cartId)) {
+
+            return res.status(400).send({ status: true, message: 'cartId is required in the request body'})
+        }
+
+        if (!isValidObjectId(cartId)) {
+            return res.status(400).send({ status: false, message: `${cartId} is not a valid cartId id` })
+        }
+
+        const cartFind = await cartModel.findOne({ _id: cartId, userId: userId }).populate('items.productId', { _id: 1, title: 1, price: 1, productImage: 1 });
+
+        if (!cartFind) {
+            return res.status(404).send({ status: false, message: `cart does not exit` })
+        }
+
+        if (!isValid(productId)) {
+
+            return res.status(400).send({ status: true, message: 'no parameteres passed of the cart data, cart unmodified', data: cartFind })
+        }
+
+
         if (!isValidObjectId(productId)) {
             return res.status(400).send({ status: false, message: `${productId} is not a valid productId id` })
         }
@@ -242,18 +266,9 @@ const updateCart = async function (req, res) {
             return res.status(404).send({ status: false, message: `product does not exit` })
         }
 
-        if (!isValidObjectId(cartId)) {
-            return res.status(400).send({ status: false, message: `${cartId} is not a valid cartId id` })
-        }
-
-        const cartFind = await cartModel.findOne({ _id: cartId, userId: userId });
-
-        if (!cartFind) {
-            return res.status(404).send({ status: false, message: `cart does not exit` })
-        }
-
         if (!isValid(removeProduct)) {
-            return res.status(400).send({ status: false, message: 'removeProduct is required' })
+
+            return res.status(400).send({ status: true, message: 'removeProduct must be in the request body to handling the product', data: cartFind })
         }
 
         if (!((removeProduct == 0) || (removeProduct == 1))) {
@@ -261,8 +276,8 @@ const updateCart = async function (req, res) {
         }
 
 
-
-        const isItemAdded = cartFind.items.find(c => c['productId'] == productId)
+        const cart = await cartModel.findOne({ _id: cartId, userId: userId })
+        const isItemAdded = cart.items.find(c => c['productId'] == productId)
 
         if (removeProduct == 0) {
 
