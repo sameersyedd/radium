@@ -79,8 +79,9 @@ const createOrder = async function (req, res) {
             status
         }
 
-        const order = await orderModel.create(addToOrder)
+        let order = await orderModel.create(addToOrder)
 
+        order= await order.populate('items.productId', { _id: 1, title: 1, price: 1, productImage: 1 })
 
         const updatedCartData = {}
 
@@ -138,7 +139,7 @@ const updateOrder = async function (req, res) {
             return res.status(400).send({ status: false, message: `${orderId} is not a valid order id` })
         }
 
-        const order = await orderModel.findOne({ _id: orderId });
+        const order = await orderModel.findOne({ _id: orderId }).populate('items.productId', { _id: 1, title: 1, price: 1, productImage: 1 });
 
         if (!order) {
             return res.status(404).send({ status: false, message: `order does not exit` })
@@ -157,7 +158,7 @@ const updateOrder = async function (req, res) {
                         return res.status(400).send({ status: false, message: `Status should be among ${["completed", "pending", "canceled"].join(', ')}` })
                     }
 
-                    const updatedOrder = await orderModel.findOneAndUpdate({ _id: orderId }, { $set: { status: status } }, { new: true })
+                    const updatedOrder = await orderModel.findOneAndUpdate({ _id: orderId }, { $set: { status: status } }, { new: true }).populate('items.productId', { _id: 1, title: 1, price: 1, productImage: 1 })
 
                     return res.status(200).send({ status: true, message: `Success`, data: updatedOrder })
                 }
@@ -192,10 +193,10 @@ const updateOrder = async function (req, res) {
         if (order.status == "pending") {
             if (status) {
                 if((["completed", "pending"].indexOf(status) === -1)) {
-                    return res.status(400).send({status: false, message: `Status should be among ${["completed", "pending"].join(', ')}`})
+                    return res.status(400).send({status: false, message: `this is not cancellable hence status should be among ${["completed", "pending"].join(', ')}`})
                 }
 
-                const updatedOrder = await orderModel.findOneAndUpdate({ _id: orderId }, { $set: { status: status } }, { new: true })
+                const updatedOrder = await orderModel.findOneAndUpdate({ _id: orderId }, { $set: { status: status } }, { new: true }).populate('items.productId', { _id: 1, title: 1, price: 1, productImage: 1 })
 
                 return res.status(200).send({ status: true, message: `Success`, data: updatedOrder })
             }
