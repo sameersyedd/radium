@@ -1,1 +1,413 @@
 This is my code
+
+
+PS E:\FunctionUp\Assigments\test> mkdir assignment
+
+
+    Directory: E:\FunctionUp\Assigments\test
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02/11/2021     14:36                assignment
+
+
+PS E:\FunctionUp\Assigments\test> cd .\assignment\
+PS E:\FunctionUp\Assigments\test\assignment> mkdir source
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02/11/2021     14:36                source
+
+
+PS E:\FunctionUp\Assigments\test\assignment> mkdir destination
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02/11/2021     14:37                destination
+
+
+PS E:\FunctionUp\Assigments\test\assignment> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02/11/2021     14:37                destination
+d-----       02/11/2021     14:36                source
+
+
+PS E:\FunctionUp\Assigments\test\assignment> cd .\source\
+PS E:\FunctionUp\Assigments\test\assignment\source> cat > test.txt
+
+cmdlet Get-Content at command pipeline position 1
+Supply values for the following parameters:
+Path[0]: Hello world this is sameer.
+Path[1]:
+cat : Cannot find path 'E:\FunctionUp\Assigments\test\assignment\source\Hello world this is sameer.' because it does not exist.
+At line:1 char:1
++ cat > test.txt
++ ~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (E:\FunctionUp\A...this is sameer.:String) [Get-Content], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment\source> cp test.txt destination
+PS E:\FunctionUp\Assigments\test\assignment\source> cd..
+PS E:\FunctionUp\Assigments\test\assignment> cd .\destination\
+PS E:\FunctionUp\Assigments\test\assignment\destination> ls
+PS E:\FunctionUp\Assigments\test\assignment\destination> d..
+PS E:\FunctionUp\Assigments\test\assignment> cd source
+PS E:\FunctionUp\Assigments\test\assignment\source> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\source
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       02/11/2021     14:38              0 destination
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment\source> pwd
+
+Path
+----
+E:\FunctionUp\Assigments\test\assignment\source
+
+
+PS E:\FunctionUp\Assigments\test\assignment\source> cp FunctionUp\Assigments\test\assignment\source\test.txt\FunctionUp\Assigments\test\assignment\destination
+cp : Cannot find path 
+'E:\FunctionUp\Assigments\test\assignment\source\FunctionUp\Assigments\test\assignment\source\test.txt\FunctionUp\Assigments\test\assignment\destination' because 
+it does not exist.
+At line:1 char:1
++ cp FunctionUp\Assigments\test\assignment\source\test.txt\FunctionUp\A ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (E:\FunctionUp\A...ent\destination:String) [Copy-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment\source> cp FunctionUp/Assigments/test/assignment/source/test.txt/FunctionUp/Assigments/test/assignment/destination
+cp : Cannot find path 
+'E:\FunctionUp\Assigments\test\assignment\source\FunctionUp\Assigments\test\assignment\source\test.txt\FunctionUp\Assigments\test\assignment\destination' because 
+it does not exist.
+At line:1 char:1
++ cp FunctionUp/Assigments/test/assignment/source/test.txt/FunctionUp/A ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (E:\FunctionUp\A...ent\destination:String) [Copy-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment\source> pwd
+
+Path
+----
+E:\FunctionUp\Assigments\test\assignment\source
+
+
+PS E:\FunctionUp\Assigments\test\assignment\source> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\source
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment\source> cp test.txt destination/
+cp : The filename, directory name, or volume label syntax is incorrect.
+At line:1 char:1
++ cp test.txt destination/
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Copy-Item], IOException
+    + FullyQualifiedErrorId : System.IO.IOException,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment\source> cp test.txt destination
+PS E:\FunctionUp\Assigments\test\assignment\source> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\source
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       02/11/2021     14:38              0 destination
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment\source> rm .\destination
+PS E:\FunctionUp\Assigments\test\assignment\source> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\source
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment\source> cp test.txt cp test.txt E:\FunctionUp\Assigments\test\assignment\
+Copy-Item : A positional parameter cannot be found that accepts argument 'test.txt'.
+At line:1 char:1
++ cp test.txt cp test.txt E:\FunctionUp\Assigments\test\assignment\
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Copy-Item], ParameterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment\source> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\source
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment\source> cd..
+PS E:\FunctionUp\Assigments\test\assignment> cd destination
+PS E:\FunctionUp\Assigments\test\assignment\destination> ls
+PS E:\FunctionUp\Assigments\test\assignment\destination> cd..
+PS E:\FunctionUp\Assigments\test\assignment> cd .\source\
+PS E:\FunctionUp\Assigments\test\assignment\source> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\source
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment\source> cp -r ~/source/test.txt/destination
+cp : Cannot find path 'C:\Users\Sameer's\source\test.txt\destination' because it does not exist.
+At line:1 char:1
++ cp -r ~/source/test.txt/destination
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\Sameer...txt\destination:String) [Copy-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment\source> cp -r test.txt/destination
+cp : Cannot find path 'E:\FunctionUp\Assigments\test\assignment\source\test.txt\destination' because it does not exist.
+At line:1 char:1
++ cp -r test.txt/destination
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (E:\FunctionUp\A...txt\destination:String) [Copy-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment\source> pwd
+
+Path
+----
+E:\FunctionUp\Assigments\test\assignment\source
+
+
+PS E:\FunctionUp\Assigments\test\assignment\source> cp -r ./FunctionUp\Assigments\test\assignment\source ./FunctionUp\Assigments\test\assignment\destination
+cp : Cannot find path 'E:\FunctionUp\Assigments\test\assignment\source\FunctionUp\Assigments\test\assignment\source' because it does not exist.
+At line:1 char:1
++ cp -r ./FunctionUp\Assigments\test\assignment\source ./FunctionUp\Ass ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (E:\FunctionUp\A...signment\source:String) [Copy-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment\source> cp ./FunctionUp\Assigments\test\assignment\source ./FunctionUp\Assigments\test\assignment\destination
+cp : Cannot find path 'E:\FunctionUp\Assigments\test\assignment\source\FunctionUp\Assigments\test\assignment\source' because it does not exist.
+At line:1 char:1
++ cp ./FunctionUp\Assigments\test\assignment\source ./FunctionUp\Assigm ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (E:\FunctionUp\A...signment\source:String) [Copy-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment\source> cp source/test.txt destination
+cp : Cannot find path 'E:\FunctionUp\Assigments\test\assignment\source\source\test.txt' because it does not exist.
+At line:1 char:1
++ cp source/test.txt destination
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (E:\FunctionUp\A...source\test.txt:String) [Copy-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.CopyItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment\source> cd..
+PS E:\FunctionUp\Assigments\test\assignment> cp .\source\test.txt .\destination\
+PS E:\FunctionUp\Assigments\test\assignment> cd .\destination\
+PS E:\FunctionUp\Assigments\test\assignment\destination> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\destination
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment\destination> cd..
+PS E:\FunctionUp\Assigments\test\assignment> cd..
+PS E:\FunctionUp\Assigments\test> cd .\assignment\
+PS E:\FunctionUp\Assigments\test\assignment> cd .\source\
+PS E:\FunctionUp\Assigments\test\assignment\source> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\source
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment\source> cd..
+PS E:\FunctionUp\Assigments\test\assignment> cd .\destination\
+PS E:\FunctionUp\Assigments\test\assignment\destination> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\destination
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment\destination> rm test.txt
+PS E:\FunctionUp\Assigments\test\assignment\destination> cd..
+PS E:\FunctionUp\Assigments\test\assignment> cp -r .\source\ .\destination\
+PS E:\FunctionUp\Assigments\test\assignment> cd .\destination\
+PS E:\FunctionUp\Assigments\test\assignment\destination> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\destination
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02/11/2021     15:12                source
+
+
+PS E:\FunctionUp\Assigments\test\assignment\destination> cd
+PS E:\FunctionUp\Assigments\test\assignment\destination> cd..
+PS E:\FunctionUp\Assigments\test\assignment> mv .\source\.test.txt .\destination\
+mv : Cannot find path 'E:\FunctionUp\Assigments\test\assignment\source\.test.txt' because it does not exist.
+At line:1 char:1
++ mv .\source\.test.txt .\destination\
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (E:\FunctionUp\A...ource\.test.txt:String) [Move-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.MoveItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment> pwd
+
+Path
+----
+E:\FunctionUp\Assigments\test\assignment
+
+
+PS E:\FunctionUp\Assigments\test\assignment> mv test.txt FunctionUp\Assigments\test\assignment\destination
+mv : Cannot find path 'E:\FunctionUp\Assigments\test\assignment\test.txt' because it does not exist.
+At line:1 char:1
++ mv test.txt FunctionUp\Assigments\test\assignment\destination
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (E:\FunctionUp\A...gnment\test.txt:String) [Move-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.MoveItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment> mv test.txt E:\FunctionUp\Assigments\test\assignment
+mv : Cannot find path 'E:\FunctionUp\Assigments\test\assignment\test.txt' because it does not exist.
+At line:1 char:1
++ mv test.txt E:\FunctionUp\Assigments\test\assignment
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (E:\FunctionUp\A...gnment\test.txt:String) [Move-Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.MoveItemCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment> cd .\source\
+PS E:\FunctionUp\Assigments\test\assignment\source> cp test.txt E:\FunctionUp\Assigments\test\assignment
+PS E:\FunctionUp\Assigments\test\assignment\source> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\source
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment\source> cd..
+PS E:\FunctionUp\Assigments\test\assignment> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02/11/2021     15:12                destination
+d-----       02/11/2021     14:55                source
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment> rm .\test.txt
+PS E:\FunctionUp\Assigments\test\assignment> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02/11/2021     15:12                destination
+d-----       02/11/2021     14:55                source
+
+
+PS E:\FunctionUp\Assigments\test\assignment> cd sor
+cd : Cannot find path 'E:\FunctionUp\Assigments\test\assignment\sor' because it does not exist.
+At line:1 char:1
++ cd sor
++ ~~~~~~
+    + CategoryInfo          : ObjectNotFound: (E:\FunctionUp\A...\assignment\sor:String) [Set-Location], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
+ 
+PS E:\FunctionUp\Assigments\test\assignment> cd .\source\
+PS E:\FunctionUp\Assigments\test\assignment\source> mv test.txt E:\FunctionUp\Assigments\test\assignment\destination\
+PS E:\FunctionUp\Assigments\test\assignment\source> ls
+PS E:\FunctionUp\Assigments\test\assignment\source> cd..
+PS E:\FunctionUp\Assigments\test\assignment> cd .\destination\
+PS E:\FunctionUp\Assigments\test\assignment\destination> ls
+
+
+    Directory: E:\FunctionUp\Assigments\test\assignment\destination
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02/11/2021     15:12                source
+-a----       02/11/2021     14:38              0 test.txt
+
+
+PS E:\FunctionUp\Assigments\test\assignment\destination> grep test.txt functionup
+grep : The term 'grep' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was 
+included, verify that the path is correct and try again.
+At line:1 char:1
++ grep test.txt functionup
++ ~~~~
+    + CategoryInfo          : ObjectNotFound: (grep:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+PS E:\FunctionUp\Assigments\test\assignment\destination> grep functionup test.txt
+grep : The term 'grep' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was 
+included, verify that the path is correct and try again.
+At line:1 char:1
++ grep functionup test.txt
++ ~~~~
+    + CategoryInfo          : ObjectNotFound: (grep:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
