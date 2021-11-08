@@ -1,0 +1,17 @@
+const loggerObj = require('./logger')
+const helperObj = require('./util/helper')
+const formatterObj = require('../validator/formatter')
+
+
+loggerObj.welcomeMessage()
+loggerObj.namm(' Sameer ')
+console.log(loggerObj.loggerEndpoint)
+console.log("----------------------------------------------------------")
+helperObj.getBatch()
+helperObj.getDate()
+helperObj.getMonth()
+console.log("----------------------------------------------------------")
+formatterObj.trimm()
+formatterObj.lower()
+formatterObj.upper()
+console.log("----------------------------------------------------------")
