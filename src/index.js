@@ -13,14 +13,15 @@ const globalMW = function(req, res, next) {
     let datetime = dateNow.getDate() + " " +
         (dateNow.getMonth() + 1) + " " +
         dateNow.getFullYear() + " " +
-        dateNow.getHours() + " " +
-        dateNow.getMinutes() + " " +
-        dateNow.getSeconds() + " " +
+        dateNow.getHours() + ":" +
+        dateNow.getMinutes() + ":" +
+        dateNow.getSeconds() + ":" +
         dateNow.getMilliseconds();
 
     let ip = req.ip
     let currentAPI = req.originalUrl
     console.log(`Today's Date is: ${datetime}-current IP is: ${ip}-Current Router is: ${currentAPI}`)
+    console.log(`${datetime}`)
 }
 app.use(globalMW)
 
