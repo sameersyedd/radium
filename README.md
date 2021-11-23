@@ -5,11 +5,11 @@
 ### POST /users
 
 - Register a user 
-- The details of a user are name(mandatory), mobile(mandatory as well as unique), email(mandatory), password(mandatory) and a isDeleted flag with a default false value
+- The details of a user are name(mandatory and unqiue), mobile(mandatory), email(mandatory), password(mandatory) and a isDeleted flag with a default false value
 
 ### POST /login
 
-- Validate credentials of the user. The credentials of a user are their email address and their password. You will receive these in the request body. The credentials are valid if there exists a user with the combination of credentials. Return a true status in response body. You also have to ensure the user is valid (not deleted) 
+- Validate credentials of the user. The credentials of a user are their name and their password. You will receive these in the request body. The credentials are valid if there exists a user with the combination of credentials. Return a true status in response body. You also have to ensure the user is valid (not deleted) 
 
 
 ### GET /users/:userId
