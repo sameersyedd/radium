@@ -7,8 +7,9 @@ const orderSchema = new mongoose.Schema({
         type: ObjectId,
     },
     productId: {
-        type: ObjectId,
+        type: ObjectId
     },
+    amount:Number,
     isFreeAppUser: Boolean,
     Date: Date,
 
