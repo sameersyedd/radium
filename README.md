@@ -1,5 +1,7 @@
 # radium
 
+Note: Submit this assignment in a branch in your own repository by the name assignment/jwt
+
 ## User Apis
 
 ### POST /users (Public API)
