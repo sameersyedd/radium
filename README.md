@@ -17,7 +17,7 @@
 
 ### PUT /users/:userId
 
-- Update a user's name recieved in the request body. Before actually updating the details ensure that the userId recieved is valid which means a valid user with this id must exist, else return a response with an error message with a structure like [this](#error-response-structure) 
+- Update a user's email recieved in the request body. Before actually updating the details ensure that the userId recieved is valid which means a valid user with this id must exist, else return a response with an error message with a structure like [this](#error-response-structure) 
 
 ### Successful Response structure
 ```yaml
