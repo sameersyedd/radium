@@ -11,14 +11,14 @@ var validateEmail = function(email) {
 const authorSchema = new mongoose.Schema({
     fname: {
         type: String,
-        require: true
+        required: true
     },
     lname: {
         type: String,
-        require: true
+        required: true
     },
     title: {
-        require: true,
+        required: true,
         type: String,
         enum: ['Mr', 'Mrs', 'Miss']
     },
@@ -27,7 +27,7 @@ const authorSchema = new mongoose.Schema({
         trim: true,
         lowercase: true,
         unique: true,
-        required: 'Email address is required',
+        required: true,
         validate: [validateEmail, 'Please fill a valid email address'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
