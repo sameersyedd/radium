@@ -11,15 +11,15 @@ var validateEmail = function(email) {
 const authorSchema = new mongoose.Schema({
      fname: { 
         type: String,
-        require: true
+        required: 'first name is required'
     },
      lname: {
         type: String,
-        require: true
+        required: 'last name is required'
      },
       title: {   
-        require: true,
-         type: String, enum: [ 'Mr' , 'Mrs', 'Miss']
+        required: true,
+         type: String, enum: [ 'Mr' , 'Mrs', 'Miss'] 
         },
         email: {
             type: String,
@@ -32,7 +32,7 @@ const authorSchema = new mongoose.Schema({
         },
         password: {
             type: String,
-            required: true
+            required: 'passward is required'
         } 
     },  { timestamps: true})
 

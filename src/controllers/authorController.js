@@ -28,7 +28,7 @@ const login = async function (req, res)
         if (User) {
             const Token = jwt.sign({ userId: User._id }, "Group2")
             res.header('x-api-key', Token)
-            res.status(200).send({ status: true })
+            res.status(200).send({ status: true, data: Token })
         } else {
             res.status(401).send({ status: false, Msg: "Invalid Email or Password" })
         }

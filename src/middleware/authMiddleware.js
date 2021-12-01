@@ -12,7 +12,7 @@ const middleWare = async function(req, res, next){
     {     
       //  console.log("jfb")
         let decodedtoken = jwt.verify(token, 'Group2')
-          console.log(decodedtoken)
+         // console.log(decodedtoken)
         if(decodedtoken.length != 0)
         {
             req.decodedtoken=decodedtoken;

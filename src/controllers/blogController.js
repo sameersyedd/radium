@@ -23,13 +23,13 @@ const createBlog = async function (req, res) {
             }
         }
         else {
-            res.status(500).send({ status: false, msg: 'invalid author id or invalid token' })
+            res.status(403).send({ status: false, msg: 'authorisation failed' })
         }
 
     }
     catch (err) {
 
-        res.status(401).send({ status: false, msg: err.message })
+        res.status(500).send({ status: false, msg: err.message })
 
     }
 }
@@ -38,16 +38,22 @@ const fetchBlogs = async function (req, res) {
     try {
 
         let querybody = req.query;
+       // console.log(querybody)
+        if(querybody[0]= null){
+           return res.status(404).send({status: false, msg: 'no query parametres given'})
+        }
+        else{
+            let data = await BlogModel.find(querybody)
+            if (data.length == 0) {
+                res.status(404).send({ status: false, msg: "no data found" })
+            } else {
+                res.status(200).send({ status: true, data: data })
+            }
 
-        let data = await BlogModel.find(querybody)
-        if (data.length == 0) {
-            res.status(404).send({ status: false, msg: "no data found" })
-        } else {
-            res.status(200).send({ status: true, data: data })
         }
     }
     catch (err) {
-        res.status(400).send({ msg: err.message })
+        res.status(500).send({status: false,  msg: err.message })
 
     }
 }
@@ -58,9 +64,9 @@ const updateBlog = async function (req, res) {
         let decodeId = req.decodedtoken.userId;
         let blogId = req.params.blogId;
 
-        let blogUser = await BlogModel.findOne({ _id: blogId })
+        let blogUser = await BlogModel.findOne({ _id: blogId, isDeleted: false })
         if (!blogUser) {
-            return res.status(400).send({ status: false, msg: 'invalid blog id' })
+            return res.status(404).send({ status: false, msg: 'invalid blog id/blog is deleted' })
         }
 
         let authorId = blogUser.authorId;
@@ -70,7 +76,7 @@ const updateBlog = async function (req, res) {
 
             let body = req.body;
             let id = req.params.blogId;
-            if (body.hasOwnProperty("isPublished") == true) {
+            if (body.hasOwnProperty("isPublished") == true ) {
                 let updatedValue = await BlogModel.findOneAndUpdate({ _id: id, isDeleted: false }, {
                     $set:
                     {
@@ -113,8 +119,8 @@ const updateBlog = async function (req, res) {
 
     }
     catch (err) {
-        res.status(404).send({ status: false, msg: err.message })
-        console.log(err.message)
+        res.status(500).send({ status: false, msg: err.message })
+        //console.log(err.message)
     }
 }
 
