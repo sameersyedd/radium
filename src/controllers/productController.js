@@ -21,10 +21,10 @@ const isValidObjectId = function (objectId) {
 }
 
 aws.config.update({
-    accessKeyId: "AKIAY3L35MCRZFF5RA4W",
-    secretAccessKey: "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",
+    accessKeyId: "AKIAY3L35MCRRMC6253G",
+    secretAccessKey: "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",
     region: "ap-south-1",
-});
+})
 
 let uploadFile = async (file) => {
 
