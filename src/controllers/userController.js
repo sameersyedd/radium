@@ -15,8 +15,8 @@ const passMinLen = 8
 const passMaxLen = 15
 
 aws.config.update({
-    accessKeyId: "AKIAY3L35MCRZFF5RA4W",
-    secretAccessKey: "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",
+    accessKeyId: "AKIAY3L35MCRRMC6253G",
+    secretAccessKey: "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",
     region: "ap-south-1",
 })
 
@@ -147,7 +147,8 @@ const register = async function (req, res) {
 
         return res.status(201).send({ status: true, message: `User created successfully`, data: objUser });
     } catch (error) {
-        return res.status(500).send({ status: false, message: error.message });
+        	console.log(`Error while registering the user is ${error.message}`)
+	    return res.status(500).send({ status: false, message: error.message });
     }
 }
 
