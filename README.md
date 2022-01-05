@@ -216,7 +216,7 @@ Send [form-data](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
 
 ### GET questions/:questionId (public api)
 - get all the answers linked to the question id.
-### PUT /answer (authentication and authorisation required)
+### PUT /answer/:answerId (authentication and authorisation required)
 - onyl the user posted the answer can edit the answer
 - __Response format__
   - _**On success**_ - Return HTTP status 201. Also return the answer document. The response should be a JSON object like [this](#successful-response-structure)
