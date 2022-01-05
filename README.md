@@ -31,7 +31,7 @@
 { 
   fname: {string, mandatory},
   lname: {string, mandatory},
-  email: {string, mandatory, valid email, unique},
+  email: {string, mandatory, valid email, unique(if exist)},
   phone: {string, not mandatory, unique, valid Indian mobile number}, 
   password: {string, mandatory, minLen 8, maxLen 15}, // encrypted password
   createdAt: {timestamp},
@@ -215,7 +215,7 @@ Send [form-data](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
   - _**On error**_ - Return a suitable error message with a valid HTTP status code. The response should be a JSON object like [this](#error-response-structure)
 
 ### GET questions/:questionId/answers/:answerId (public api)
-- get all the answers linked to the question id.
+- get the answers linked to the question id.
 ### PUT /answer (authentication and authorisation required)
 - onyl the user posted the answer can edit the answer
 - __Response format__
