@@ -200,7 +200,8 @@ Send [form-data](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
 {
   answeredBy: {ObjectId, refs to User, mandatory},
   text: {string, mandatory},
-  questionId: {ObjectId, refs to question, mandatory}, 
+  questionId: {ObjectId, refs to question, mandatory},
+  isDeleted : default false,
   createdAt: {timestamp},
   updatedAt: {timestamp},
 }
@@ -289,7 +290,6 @@ Send [form-data](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
   ansnweredBy : ObjectId("88abc190ef0288abc190ef55"),
   questionId : ObjectId("88abc190ef0288abc190ef35"),
   text: 'from my point of view',
-  isDeleted : default false, 
   createdAt: "2021-09-17T04:25:07.803Z",
   updatedAt: "2021-09-17T04:25:07.803Z",
 }
