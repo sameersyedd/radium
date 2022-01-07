@@ -219,6 +219,10 @@ Send [form-data](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
   - _**On success**_ - Return HTTP status 201. Also return the answer document. The response should be a JSON object like [this](#successful-response-structure)
   - _**On error**_ - Return a suitable error message with a valid HTTP status code. The response should be a JSON object like [this](#error-response-structure)
 
+```diff
++ Please note a user can not answer their own question. In such a scenario, return a suitable HTTP status code and message.
+```  
+
 ### GET questions/:questionId/answer (public api)
 - get all the answers linked to the question id.
 ### PUT /answer/:answerId (authentication and authorisation required)
