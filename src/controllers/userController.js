@@ -22,6 +22,7 @@ aws.config.update({
 
 const uploadFile = async function (file, name) {
     return new Promise(function (resolve, reject) {
+
         // Create S3 service object
         const s3 = new aws.S3({ apiVersion: "2006-03-01" })
 
@@ -125,7 +126,6 @@ const register = async function (req, res) {
             return res.status(400).send({status: false, message: 'Profile image is required'})
         }
         // Validation ends
-
         const profileImage = await uploadFile(files[0], 'user')
         const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
